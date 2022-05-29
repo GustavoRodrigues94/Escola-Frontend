@@ -1,0 +1,75 @@
+<div class="container">
+
+  <mat-card>
+
+    <mat-progress-bar mode="query" class="progress-bar" *ngIf="mostrarCarregamento"></mat-progress-bar>
+
+    <mat-card-header>
+      <mat-card-title>Lista de alunos</mat-card-title>
+      <mat-card-subtitle>Adicione, altere ou delete um aluno da lista</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <button mat-button color="primary" [routerLink]="['aluno']">
+        <mat-icon>add</mat-icon> Adicionar aluno
+      </button>
+
+      <mat-table [dataSource]="dataSource">
+        <mat-header-row *matHeaderRowDef="colunasTabela"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: colunasTabela;"></mat-row>
+
+        <ng-container matColumnDef="Nome">
+          <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+          <mat-cell *matCellDef="let aluno">{{aluno.nome}} {{aluno.sobrenome}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let aluno"> {{aluno.email}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="DataNascimento">
+          <mat-header-cell *matHeaderCellDef> Nascimento </mat-header-cell>
+          <mat-cell *matCellDef="let aluno"> {{aluno.dataNascimento | date: 'dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Escolaridade">
+          <mat-header-cell *matHeaderCellDef> Escolaridade </mat-header-cell>
+          <mat-cell *matCellDef="let aluno"> {{aluno.escolaridade.escolaridadeDescricao}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Historico">
+          <mat-header-cell *matHeaderCellDef> Histórico </mat-header-cell>
+          <mat-cell *matCellDef="let aluno">
+            <button mat-button color="primary" (click)="baixarHistorico(aluno.historicoEscolar)">
+              <mat-icon style="font-size: 22px;" *ngIf="aluno.historicoEscolar.formatoHistoricoDescricao == '.pdf'">picture_as_pdf</mat-icon>
+              <mat-icon style="font-size: 22px;" *ngIf="aluno.historicoEscolar.formatoHistoricoDescricao == '.docx'">description</mat-icon>
+              Baixar
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Ações" slot="end">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let aluno" class="tabela-acoes">
+            <button mat-button color="primary" [routerLink]="['/aluno', aluno.id]">
+              <mat-icon style="font-size: 18px;">edit</mat-icon> Editar
+            </button>
+
+            <button mat-button color="warn" (click)="deletarAluno(aluno)">
+              <mat-icon style="font-size: 18px;">delete</mat-icon> Excluir
+            </button>
+
+          </mat-cell>
+        </ng-container>
+
+      </mat-table>
+
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]"></mat-paginator>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

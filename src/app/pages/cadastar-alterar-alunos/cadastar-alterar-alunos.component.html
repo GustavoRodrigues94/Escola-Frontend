@@ -1,0 +1,102 @@
+<div class="container">
+
+  <mat-card class="card-cadastro">
+    <mat-card-header>
+      <mat-card-title>Cadastro de alunos</mat-card-title>
+      <mat-card-subtitle>Informe os dados abaixo para cadastrar/alterar um aluno</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <form [formGroup]="formAluno" novalidate>
+
+        <mat-form-field appearance="outline" class="width-cinquenta">
+          <mat-label>Nome</mat-label>
+          <input type="text" matInput formControlName="nome" placeholder="Ex. Gustavo" required>
+          <mat-error *ngIf="formAluno.get('nome')?.hasError('required') && formAluno.get('nome')?.touched">
+            Nome é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="width-cinquenta">
+          <mat-label>Sobrenome</mat-label>
+          <input type="text" matInput formControlName="sobrenome" placeholder="Ex. Rodrigues da Silveira" required>
+          <mat-error *ngIf="formAluno.get('sobrenome')?.hasError('required') && formAluno.get('sobrenome')?.touched">
+            Sobrenome é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="width-cinquenta">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" placeholder="Ex: gustavorodriguestsi@gmail.com" required>
+          <mat-error *ngIf="formAluno.get('email')?.hasError('email') && formAluno.get('email')?.touched">
+            Por favor, informe um email válido
+          </mat-error>
+          <mat-error *ngIf="formAluno.get('email')?.hasError('required') && formAluno.get('email')?.touched">
+            Email é <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="width-vinte">
+          <mat-label>Data de nascimento</mat-label>
+          <input type="text" matInput [matDatepickerFilter]="filtrarDataNascimento" [matDatepicker]="picker"
+            formControlName="dataNascimento">
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error
+            *ngIf="formAluno.get('dataNascimento')?.hasError('required') && formAluno.get('dataNascimento')?.touched">
+            Data de nascimento é <strong>obrigatória</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="width-trinta">
+          <mat-label>Escolaridade</mat-label>
+          <mat-select formControlName="escolaridadeId" required>
+            <mat-option *ngFor="let escolaridade of listaEscolaridade" [value]="escolaridade.id">
+              {{escolaridade.escolaridadeDescricao}}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="formAluno.get('escolaridade')?.hasError('required') && formAluno.get('escolaridade')?.touched">
+            Por favor, selecione uma opção
+          </mat-error>
+        </mat-form-field>
+
+        <div class="historico-arquivo">
+
+          <mat-form-field class="width-trinta" *ngIf="!exibirHistoricoEscolar">
+            <ngx-mat-file-input #historicoEscolarInput formControlName="historicoEscolarImagem"
+              placeholder="Selecione o histórico escolar" [accept]="'.pdf,.docx'"></ngx-mat-file-input>
+            <button mat-icon-button matSuffix *ngIf="!historicoEscolarInput.empty"
+              (click)="historicoEscolarInput.clear($event)">
+              <mat-icon>clear</mat-icon>
+            </button>
+            <mat-hint>Apenas .PDF ou .DOCx</mat-hint>
+            <mat-icon matSuffix>attach_file</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="width-trinta" *ngIf="exibirHistoricoEscolar">
+            <mat-label>Histórico escolar</mat-label>
+            <input type="text" matInput [value]="nomeHistoricoEscolar" readonly="true">
+            <button matSuffix mat-icon-button color="warn" (click)="removerHistoricoEscolar()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+
+        </div>
+        <mat-card-actions align="end">
+          <button mat-stroked-button color="warn" [routerLink]="['']">Cancelar</button>
+          <button mat-raised-button color="primary" (click)="cadastrarAlterar()" *ngIf="!alterandoAluno">
+            <mat-icon>person_add_alt_1</mat-icon> Adicionar
+          </button>
+          <button mat-raised-button color="primary" (click)="cadastrarAlterar()" *ngIf="alterandoAluno">
+            <mat-icon>restart_alt</mat-icon> Atualizar
+          </button>
+        </mat-card-actions>
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>
