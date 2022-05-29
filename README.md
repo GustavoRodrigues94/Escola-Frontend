@@ -1,27 +1,17 @@
-# Escola
+![WhatsApp Image 2022-05-29 at 15 10 18](https://user-images.githubusercontent.com/40209308/170885597-5c2d9fed-c18d-415a-8f46-306e5d85dae4.jpeg)
+![WhatsApp Image 2022-05-29 at 15 09 30](https://user-images.githubusercontent.com/40209308/170885596-55507d68-1936-4e9c-b18b-61971e2902e0.jpeg)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
+# Veja o Back-end (ASP.NETCore 5 + DDD + CQRS)
+[-> Ir para o Back-end](https://github.com/GustavoRodrigues94/Escola-API)
 
-## Development server
+# CRUD-Escola-Angular
+CRUD de aluno com upload de arquivo, utilizando Angular + Angular Material
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# Necessário rodar os comandos básicos no CLI para executar o projeto localmente
+Após baixar o projeto, abra-o e utilize o comando npm abaixo:
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<code> npm install --save-dev @angular-devkit/build-angular </code>
+ 
+ Caso tudo ocorra perfeito, utilize o comando abaixo para executar a aplicação: 
+  
+<code> ng serve --o </code>
